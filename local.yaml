@@ -1,10 +1,10 @@
 ---
 - hosts: localhost
   connection: local
-  become: true # allows sudo to root
+  become: true  # allows sudo to root
 
   tasks:
-  - name install htop
-    homebrew:
-      name: wget
-      state: present
+    - name: install wget using homebrew
+      homebrew:
+        name: wget
+        state: present
