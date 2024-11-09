@@ -14,12 +14,10 @@
     homebrew:
       name: visual-studio-code
       state: present
-      install_options:
-        - "--cask"
 
   - name: Install Firefox
     homebrew:
       name: firefox
       state: present
-      install_options:
-        - "--cask"
+
+
