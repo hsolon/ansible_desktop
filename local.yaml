@@ -19,12 +19,6 @@
         type: int
         value: 0
 
-    - name: Add spacer tile to Dock
-      ansible.builtin.shell: |
-        defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}'
-      args:
-        executable: /bin/bash
-
     - name: Set Dock position to left
       community.general.osx_defaults:
         domain: com.apple.dock
