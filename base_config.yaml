@@ -7,3 +7,17 @@
     - finder
     - screenshots
     - other_configs
+  
+  # install applications
+  tasks:
+  - name: Install VS Code
+    homebrew:
+      name: visual-studio-code
+      tap: homebrew/cask
+      state: present
+
+  - name: Install Firefox
+    homebrew:
+      name: firefox
+      tap: homebrew/cask
+      state: present
