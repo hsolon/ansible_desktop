@@ -139,23 +139,18 @@
       # Sets the default Finder view mode to List view.
 
     # Finder sidebar configurations
-    - name: Set Finder sidebar preferences
-      community.general.osx_defaults:
-        domain: com.apple.sidebarlists
-        key: favoritesitems
-        type: array
-        value: [
-          { "name": "All My Files", "visibility": false },
-          { "name": "AirDrop", "visibility": true },
-          { "name": "Applications", "visibility": true },
-          { "name": "Desktop", "visibility": true },
-          { "name": "Documents", "visibility": true },
-          { "name": "Downloads", "visibility": true },
-          { "name": "Movies", "visibility": true },
-          { "name": "Music", "visibility": true },
-          { "name": "Pictures", "visibility": true },
-          { "name": "Home", "visibility": true }
-        ]
+    - name: Modify Finder sidebar preferences
+      ansible.builtin.command: |
+        defaults write com.apple.sidebarlists favoritesitems -array \
+          '{ "Name" = "Desktop"; "Visibility" = "Always"; }' \
+          '{ "Name" = "Documents"; "Visibility" = "Always"; }' \
+          '{ "Name" = "Downloads"; "Visibility" = "Always"; }' \
+          '{ "Name" = "Movies"; "Visibility" = "Always"; }' \
+          '{ "Name" = "Music"; "Visibility" = "Always"; }' \
+          '{ "Name" = "Pictures"; "Visibility" = "Always"; }' \
+          '{ "Name" = "Home"; "Visibility" = "Always"; }'
+      ignore_errors: true
+      register: sidebar_config
       # Configures the sidebar to show or hide specific folders like Movies, Pictures, and Home, while hiding Recents.
 
     - name: Restart Finder to apply changes
