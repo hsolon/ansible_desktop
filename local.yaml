@@ -4,6 +4,73 @@
   become: false
 
   tasks:
+    # Set autohide delay and animation time modifier to 0 for instant Dock show/hide
+    - name: Remove Dock autohide delay
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: autohide-delay
+        type: float
+        value: 0
+
+    - name: Speed up Dock autohide animation
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: autohide-time-modifier
+        type: int
+        value: 0
+
+    # Add a spacer tile to the Dock
+    - name: Add spacer tile to Dock
+      ansible.builtin.shell: |
+        defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}'
+      args:
+        executable: /bin/bash
+
+    # Set Dock position to left
+    - name: Set Dock position to left
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: orientation
+        type: string
+        value: "left"
+
+    # Disable minimize/maximize animations
+    - name: Disable Dock minimize/maximize animation
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: mineffect
+        type: string
+        value: "scale"
+
+    # Enable auto-hide for the Dock
+    - name: Enable auto-hide for the Dock
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: autohide
+        type: bool
+        value: true
+
+    # Disable "Animate opening applications" in Dock
+    - name: Disable Dock animate opening applications
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: launchanim
+        type: bool
+        value: false
+
+    # Disable "Show recent applications in Dock"
+    - name: Disable Dock show recent applications
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: show-recents
+        type: bool
+        value: false
+
+    # Restart Dock to apply changes
+    - name: Restart Dock to apply changes
+      ansible.builtin.command: killall Dock
+    
+      tasks:
     # Finder: Show all filename extensions
     - name: Show all filename extensions in Finder
       community.general.osx_defaults:
