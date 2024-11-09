@@ -19,12 +19,12 @@
         type: int
         value: 0
 
-    # Add a spacer tile to the Dock
-    - name: Add spacer tile to Dock
-      ansible.builtin.shell: |
-        defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}'
-      args:
-        executable: /bin/bash
+    # # Add a spacer tile to the Dock
+    # - name: Add spacer tile to Dock
+    #   ansible.builtin.shell: |
+    #     defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}'
+    #   args:
+    #     executable: /bin/bash
 
     # Set Dock position to left
     - name: Set Dock position to left
