@@ -101,6 +101,14 @@
         type: string
         value: "Nlsv"
 
+    - name: Disable natural scrolling
+      community.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: com.apple.swipescrolldirection
+        type: bool
+        value: false
+
+
     # Restart Finder to apply changes
     - name: Restart Finder to apply changes
       ansible.builtin.command: killall Finder
