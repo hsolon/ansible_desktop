@@ -109,7 +109,7 @@
     - name: Show Finder status bar
       community.general.osx_defaults:
         domain: com.apple.finder
-        key: ShowStatusBar
+        key: ShowPathBar
         type: bool
         value: true
       # Enables the status bar at the bottom of Finder windows.
@@ -138,20 +138,20 @@
         value: Nlsv
       # Sets the default Finder view mode to List view.
 
-    # Finder sidebar configurations
-    - name: Modify Finder sidebar preferences
-      ansible.builtin.command: |
-        defaults write com.apple.sidebarlists favoritesitems -array \
-          '{ "Name" = "Desktop"; "Visibility" = "Always"; }' \
-          '{ "Name" = "Documents"; "Visibility" = "Always"; }' \
-          '{ "Name" = "Downloads"; "Visibility" = "Always"; }' \
-          '{ "Name" = "Movies"; "Visibility" = "Always"; }' \
-          '{ "Name" = "Music"; "Visibility" = "Always"; }' \
-          '{ "Name" = "Pictures"; "Visibility" = "Always"; }' \
-          '{ "Name" = "Home"; "Visibility" = "Always"; }'
-      ignore_errors: true
-      register: sidebar_config
-      # Configures the sidebar to show or hide specific folders like Movies, Pictures, and Home, while hiding Recents.
+    # # Finder sidebar configurations
+    # - name: Modify Finder sidebar preferences
+    #   ansible.builtin.command: |
+    #     defaults write com.apple.sidebarlists favoritesitems -array \
+    #       '{ "Name" = "Desktop"; "Visibility" = "Always"; }' \
+    #       '{ "Name" = "Documents"; "Visibility" = "Always"; }' \
+    #       '{ "Name" = "Downloads"; "Visibility" = "Always"; }' \
+    #       '{ "Name" = "Movies"; "Visibility" = "Always"; }' \
+    #       '{ "Name" = "Music"; "Visibility" = "Always"; }' \
+    #       '{ "Name" = "Pictures"; "Visibility" = "Always"; }' \
+    #       '{ "Name" = "Home"; "Visibility" = "Always"; }'
+    #   ignore_errors: true
+    #   register: sidebar_config
+    #   # Configures the sidebar to show or hide specific folders like Movies, Pictures, and Home, while hiding Recents.
 
     - name: Restart Finder to apply changes
       ansible.builtin.command: killall Finder
