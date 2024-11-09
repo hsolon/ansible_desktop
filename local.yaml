@@ -1,8 +1,47 @@
 ---
 - hosts: localhost
   connection: local
-  become: false  # if true, allows sudo to root
+  become: false
 
   tasks:
-    - name: install wget using homebrew (force ARM)
-      command: arch -arm64 /opt/homebrew/bin/brew install wget
+    # Set autohide delay and animation time modifier to 0 for instant Dock show/hide
+    - name: Remove Dock autohide delay
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: autohide-delay
+        type: float
+        value: 0
+
+    - name: Speed up Dock autohide animation
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: autohide-time-modifier
+        type: int
+        value: 0
+
+    # Add a spacer tile to the Dock
+    - name: Add spacer tile to Dock
+      ansible.builtin.shell: |
+        defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}'
+      args:
+        executable: /bin/bash
+
+    # Set Dock position to left
+    - name: Set Dock position to left
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: orientation
+        type: string
+        value: "left"
+
+    # Disable minimize/maximize animations
+    - name: Disable Dock minimize/maximize animation
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: mineffect
+        type: string
+        value: "scale"
+
+    # Restart Dock to apply changes
+    - name: Restart Dock to apply changes
+      ansible.builtin.command: killall Dock
