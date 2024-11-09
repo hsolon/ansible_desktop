@@ -4,7 +4,7 @@
   become: false
 
   tasks:
-    # Dock Configurations
+    # Dock configurations
     - name: Remove Dock autohide delay
       community.general.osx_defaults:
         domain: com.apple.dock
@@ -18,6 +18,12 @@
         key: autohide-time-modifier
         type: int
         value: 0
+
+    - name: Add spacer tile to Dock
+      ansible.builtin.shell: |
+        defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}'
+      args:
+        executable: /bin/bash
 
     - name: Set Dock position to left
       community.general.osx_defaults:
@@ -57,7 +63,7 @@
     - name: Restart Dock to apply changes
       ansible.builtin.command: killall Dock
 
-    # Finder Configurations
+    # Finder configurations
     - name: Show all filename extensions in Finder
       community.general.osx_defaults:
         domain: NSGlobalDomain
@@ -75,17 +81,10 @@
     - name: Hide Recents from Finder sidebar
       community.general.osx_defaults:
         domain: com.apple.finder
-        key: ShowRecentDocuments
-        type: bool
-        value: false
+        key: FXPreferredGroupBy
+        type: string
+        value: "None"
 
-    - name: Enable Finder status bar to show full path at the bottom
-      community.general.osx_defaults:
-        domain: com.apple.finder
-        key: ShowStatusBar
-        type: bool
-        value: true
-    
     - name: Show full POSIX path in Finder window title
       community.general.osx_defaults:
         domain: com.apple.finder
@@ -93,21 +92,59 @@
         type: bool
         value: true
 
-
-    - name: Set Finder view to List view by default
+    - name: Show Finder status bar
       community.general.osx_defaults:
         domain: com.apple.finder
-        key: FXPreferredViewStyle
-        type: string
-        value: "Nlsv"
-
-    - name: Disable natural scrolling
-      community.general.osx_defaults:
-        domain: NSGlobalDomain
-        key: com.apple.swipescrolldirection
+        key: ShowStatusBar
         type: bool
-        value: false
+        value: true
 
+    # Save screenshots to Downloads folder
+    - name: Set screenshots location to Downloads
+      community.general.osx_defaults:
+        domain: com.apple.screencapture
+        key: location
+        type: string
+        value: "{{ ansible_env.HOME }}/Downloads"
+
+    # Set screenshots format to JPG
+    - name: Set screenshots format to JPG
+      community.general.osx_defaults:
+        domain: com.apple.screencapture
+        key: type
+        type: string
+        value: "jpg"
+
+    # Avoid creating .DS_Store files on network volumes
+    - name: Prevent .DS_Store files on network volumes
+      community.general.osx_defaults:
+        domain: com.apple.desktopservices
+        key: DSDontWriteNetworkStores
+        type: bool
+        value: true
+
+    # Speed up Mission Control animations
+    - name: Speed up Mission Control animation duration
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: expose-animation-duration
+        type: float
+        value: 0.15
+
+    # Set Home directory as the default location for new Finder windows
+    - name: Set Home directory as default location for new Finder windows
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: NewWindowTarget
+        type: string
+        value: "PfLo"  # "PfLo" sets it to "Other..." for custom paths
+
+    - name: Set Home directory path for new Finder windows
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: NewWindowTargetPath
+        type: string
+        value: "file://{{ ansible_env.HOME }}/"
 
     # Restart Finder to apply changes
     - name: Restart Finder to apply changes
