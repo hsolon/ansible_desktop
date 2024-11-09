@@ -70,7 +70,6 @@
     - name: Restart Dock to apply changes
       ansible.builtin.command: killall Dock
     
-      tasks:
     # Finder: Show all filename extensions
     - name: Show all filename extensions in Finder
       community.general.osx_defaults:
