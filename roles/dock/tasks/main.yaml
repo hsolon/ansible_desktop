@@ -1,0 +1,26 @@
+---
+- name: Remove Dock autohide delay
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: autohide-delay
+    type: float
+    value: 0
+
+- name: Speed up Dock autohide animation
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: autohide-time-modifier
+    type: int
+    value: 0
+
+- name: Set Dock position to left
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: orientation
+    type: string
+    value: "left"
+
+# ... Add remaining Dock tasks here ...
+
+- name: Restart Dock to apply changes
+  ansible.builtin.command: killall Dock

@@ -1,0 +1,19 @@
+---
+- name: Show all filename extensions in Finder
+  community.general.osx_defaults:
+    domain: NSGlobalDomain
+    key: AppleShowAllExtensions
+    type: bool
+    value: true
+
+- name: Hide Recents from Finder sidebar
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: FXPreferredGroupBy
+    type: string
+    value: "None"
+
+# ... Add remaining Finder tasks here ...
+
+- name: Restart Finder to apply changes
+  ansible.builtin.command: killall Finder
