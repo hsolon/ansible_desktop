@@ -13,11 +13,13 @@
   - name: Install VS Code
     homebrew:
       name: visual-studio-code
-      tap: homebrew/cask
       state: present
+      install_options:
+        - "--cask"
 
   - name: Install Firefox
     homebrew:
       name: firefox
-      tap: homebrew/cask
       state: present
+      install_options:
+        - "--cask"
