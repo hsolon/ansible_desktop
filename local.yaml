@@ -81,16 +81,24 @@
     - name: Hide Recents from Finder sidebar
       community.general.osx_defaults:
         domain: com.apple.finder
-        key: FXPreferredGroupBy
-        type: string
-        value: "None"
+        key: ShowRecentDocuments
+        type: bool
+        value: false
 
+    - name: Enable Finder status bar to show full path at the bottom
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: ShowStatusBar
+        type: bool
+        value: true
+    
     - name: Show full POSIX path in Finder window title
       community.general.osx_defaults:
         domain: com.apple.finder
         key: _FXShowPosixPathInTitle
         type: bool
         value: true
+
 
     - name: Set Finder view to List view by default
       community.general.osx_defaults:
