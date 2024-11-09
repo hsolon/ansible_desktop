@@ -4,68 +4,38 @@
   become: false
 
   tasks:
-    # Set autohide delay and animation time modifier to 0 for instant Dock show/hide
-    - name: Remove Dock autohide delay
+    # Finder: Show all filename extensions
+    - name: Show all filename extensions in Finder
       community.general.osx_defaults:
-        domain: com.apple.dock
-        key: autohide-delay
-        type: float
-        value: 0
-
-    - name: Speed up Dock autohide animation
-      community.general.osx_defaults:
-        domain: com.apple.dock
-        key: autohide-time-modifier
-        type: int
-        value: 0
-
-    # # Add a spacer tile to the Dock
-    # - name: Add spacer tile to Dock
-    #   ansible.builtin.shell: |
-    #     defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}'
-    #   args:
-    #     executable: /bin/bash
-
-    # Set Dock position to left
-    - name: Set Dock position to left
-      community.general.osx_defaults:
-        domain: com.apple.dock
-        key: orientation
-        type: string
-        value: "left"
-
-    # Disable minimize/maximize animations
-    - name: Disable Dock minimize/maximize animation
-      community.general.osx_defaults:
-        domain: com.apple.dock
-        key: mineffect
-        type: string
-        value: "scale"
-
-    # Enable auto-hide for the Dock
-    - name: Enable auto-hide for the Dock
-      community.general.osx_defaults:
-        domain: com.apple.dock
-        key: autohide
+        domain: NSGlobalDomain
+        key: AppleShowAllExtensions
         type: bool
         value: true
 
-    # Disable "Animate opening applications" in Dock
-    - name: Disable Dock animate opening applications
+    # Finder: Remove Tags from sidebar
+    - name: Remove Tags from Finder sidebar
       community.general.osx_defaults:
-        domain: com.apple.dock
-        key: launchanim
+        domain: com.apple.finder
+        key: ShowRecentTags
         type: bool
         value: false
 
-    # Disable "Show recent applications in Dock"
-    - name: Disable Dock show recent applications
+    # Finder: Hide Recents from the sidebar
+    - name: Hide Recents from Finder sidebar
       community.general.osx_defaults:
-        domain: com.apple.dock
-        key: show-recents
-        type: bool
-        value: false
+        domain: com.apple.finder
+        key: FXPreferredGroupBy
+        type: string
+        value: "None"
 
-    # Restart Dock to apply changes
-    - name: Restart Dock to apply changes
-      ansible.builtin.command: killall Dock
+    # Finder: Show full path in Finder window titles
+    - name: Show full POSIX path in Finder window title
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: _FXShowPosixPathInTitle
+        type: bool
+        value: true
+
+    # Restart Finder to apply changes
+    - name: Restart Finder to apply changes
+      ansible.builtin.command: killall Finder
