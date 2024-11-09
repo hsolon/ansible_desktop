@@ -42,6 +42,30 @@
         type: string
         value: "scale"
 
+    # Enable auto-hide for the Dock
+    - name: Enable auto-hide for the Dock
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: autohide
+        type: bool
+        value: true
+
+    # Disable "Animate opening applications" in Dock
+    - name: Disable Dock animate opening applications
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: launchanim
+        type: bool
+        value: false
+
+    # Disable "Show recent applications in Dock"
+    - name: Disable Dock show recent applications
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: show-recents
+        type: bool
+        value: false
+
     # Restart Dock to apply changes
     - name: Restart Dock to apply changes
       ansible.builtin.command: killall Dock
