@@ -4,7 +4,7 @@
   become: false
 
   tasks:
-    # Set autohide delay and animation time modifier to 0 for instant Dock show/hide
+    # Dock Configurations
     - name: Remove Dock autohide delay
       community.general.osx_defaults:
         domain: com.apple.dock
@@ -19,14 +19,12 @@
         type: int
         value: 0
 
-    # Add a spacer tile to the Dock
     - name: Add spacer tile to Dock
       ansible.builtin.shell: |
         defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}'
       args:
         executable: /bin/bash
 
-    # Set Dock position to left
     - name: Set Dock position to left
       community.general.osx_defaults:
         domain: com.apple.dock
@@ -34,7 +32,6 @@
         type: string
         value: "left"
 
-    # Disable minimize/maximize animations
     - name: Disable Dock minimize/maximize animation
       community.general.osx_defaults:
         domain: com.apple.dock
@@ -42,7 +39,6 @@
         type: string
         value: "scale"
 
-    # Enable auto-hide for the Dock
     - name: Enable auto-hide for the Dock
       community.general.osx_defaults:
         domain: com.apple.dock
@@ -50,7 +46,6 @@
         type: bool
         value: true
 
-    # Disable "Animate opening applications" in Dock
     - name: Disable Dock animate opening applications
       community.general.osx_defaults:
         domain: com.apple.dock
@@ -58,7 +53,6 @@
         type: bool
         value: false
 
-    # Disable "Show recent applications in Dock"
     - name: Disable Dock show recent applications
       community.general.osx_defaults:
         domain: com.apple.dock
@@ -66,11 +60,10 @@
         type: bool
         value: false
 
-    # Restart Dock to apply changes
     - name: Restart Dock to apply changes
       ansible.builtin.command: killall Dock
-    
-    # Finder: Show all filename extensions
+
+    # Finder Configurations
     - name: Show all filename extensions in Finder
       community.general.osx_defaults:
         domain: NSGlobalDomain
@@ -78,7 +71,6 @@
         type: bool
         value: true
 
-    # Finder: Remove Tags from sidebar
     - name: Remove Tags from Finder sidebar
       community.general.osx_defaults:
         domain: com.apple.finder
@@ -86,7 +78,6 @@
         type: bool
         value: false
 
-    # Finder: Hide Recents from the sidebar
     - name: Hide Recents from Finder sidebar
       community.general.osx_defaults:
         domain: com.apple.finder
@@ -94,13 +85,19 @@
         type: string
         value: "None"
 
-    # Finder: Show full path in Finder window titles
     - name: Show full POSIX path in Finder window title
       community.general.osx_defaults:
         domain: com.apple.finder
         key: _FXShowPosixPathInTitle
         type: bool
         value: true
+
+    - name: Set Finder view to List view by default
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: FXPreferredViewStyle
+        type: string
+        value: "Nlsv"
 
     # Restart Finder to apply changes
     - name: Restart Finder to apply changes
