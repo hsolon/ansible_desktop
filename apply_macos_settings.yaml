@@ -1,16 +1,22 @@
 ---
-- name: macOS Configuration
+- name: Apply macOS Settings with Ansible
   hosts: localhost
   connection: local
+  become: true
   tasks:
-    - name: Execute .osx configuration script
-      ansible.builtin.shell: |
-        chmod +x ~/.osx
-        ~/.osx
-      args:
-        executable: /bin/bash
-      register: script_output
+    - name: Ensure .osx configuration script is executable
+      ansible.builtin.file:
+        path: "{{ lookup('env', 'HOME') }}/.osx"
+        mode: '0755'
+        state: file
 
-    - name: Display script output
-      ansible.builtin.debug:
-        var: script_output.stdout
+    - name: Execute .osx configuration script
+      ansible.builtin.command: "{{ lookup('env', 'HOME') }}/.osx"
+      args:
+        chdir: "{{ lookup('env', 'HOME') }}"
+      register: result
+      ignore_errors: true
+
+    - name: Display output of .osx script execution
+      debug:
+        var: result.stdout_lines
