@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+# Mac OS X configuration for User
+# Applies customized preferences for Dock, Finder, scrolling, etc., on macOS.
+#
+# Options:
+#   --no-restart: Don't restart any apps or services after running the script.
+#
+# This script assumes the latest macOS version and customizes system preferences.
+# Requires 'sudo' for some configurations.
+#
+# @see: https://github.com/hsolon/ansible_desktop.git
+
+# Warn if the script is not run as root.
+if [[ $EUID -ne 0 ]]; then
+  RUN_AS_ROOT=false
+  printf "Some commands may not run without sudo. To run as root, use:\n sudo $0\n\n" | fold -s -w 80
+else
+  RUN_AS_ROOT=true
+  while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+fi
+
+###############################################################################
+# Dock                                                                        #
+###############################################################################
+
+# Set Dock settings
+defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock autohide-delay -float 0
+defaults write com.apple.dock tilesize -int 40
+defaults write com.apple.dock orientation -string "left"
+defaults write com.apple.dock minimize-to-application -bool true
+defaults write com.apple.dock launchanim -bool false
+defaults write com.apple.dock show-recents -bool false
+
+# Add a spacer tile to the Dock
+defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'
+
+###############################################################################
+# Finder                                                                      #
+###############################################################################
+
+# Customize Finder preferences
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+defaults write com.apple.finder ShowStatusBar -bool true
+defaults write com.apple.finder SidebarTagsSctionDisclosedState -bool false
+defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+defaults write com.apple.finder ShowRecentTags -bool false
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
+###############################################################################
+# System Preferences                                                          #
+###############################################################################
+
+# Disable 'natural' (reverse) scrolling
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+
+# Prevent open apps from hiding on Desktop click
+defaults write com.apple.dock single-app -bool false
+
+###############################################################################
+# Kill/restart affected applications                                          #
+###############################################################################
+
+if [[ ! ($* == *--no-restart*) ]]; then
+  for app in "Dock" "Finder" "SystemUIServer"; do
+    killall "${app}" > /dev/null 2>&1
+  done
+fi
+
+printf "Script completed. Log out and log back in to apply settings fully.\n"
