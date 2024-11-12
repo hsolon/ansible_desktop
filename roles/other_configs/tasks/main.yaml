@@ -5,6 +5,7 @@
     key: DSDontWriteNetworkStores
     type: bool
     value: true
+  # Disables .DS_Store files creation on network volumes.
 
 - name: Disable automatic spell check
   community.general.osx_defaults:
@@ -12,6 +13,7 @@
     key: NSAutomaticSpellingCorrectionEnabled
     type: bool
     value: false
+  # Disables automatic spell check.
 
 - name: Disable natural scrolling for mouse
   community.general.osx_defaults:
@@ -19,3 +21,20 @@
     key: com.apple.swipescrolldirection
     type: bool
     value: false
+  # Disables natural scrolling direction for the mouse.
+
+- name: Set screenshots location to Downloads
+  community.general.osx_defaults:
+    domain: com.apple.screencapture
+    key: location
+    type: string
+    value: "{{ ansible_env.HOME }}/Downloads"
+  # Sets the default location for screenshots to the Downloads folder.
+
+- name: Set screenshots format to JPG
+  community.general.osx_defaults:
+    domain: com.apple.screencapture
+    key: type
+    type: string
+    value: "jpg"
+  # Sets the screenshot file format to JPG.
