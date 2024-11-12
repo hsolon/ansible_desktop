@@ -61,7 +61,7 @@
     key: expose-animation-duration
     type: float
     value: 0.15
-  # Speeds up the animations when switching between apps in Mission Control.
+  # Speeds up the animations when switching between apps in Mission Control
 
     
 
