@@ -5,6 +5,7 @@
     key: autohide-delay
     type: float
     value: 0
+  # This removes the delay when auto-hiding the Dock, making it appear instantly. One of thes should work.
 
 - name: Speed up Dock autohide animation
   community.general.osx_defaults:
@@ -12,6 +13,7 @@
     key: autohide-time-modifier
     type: int
     value: 0
+  # This speeds up the animation for the Dock when it auto-hides.
 
 - name: Set Dock position to left
   community.general.osx_defaults:
@@ -19,6 +21,49 @@
     key: orientation
     type: string
     value: "left"
+  # Positions the Dock on the left side of the screen.
+
+- name: Disable Dock minimize/maximize animation
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: mineffect
+    type: string
+    value: "scale"
+  # Disables animation for minimizing/maximizing apps in the Dock.
+
+- name: Enable auto-hide for the Dock
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: autohide
+    type: bool
+    value: true
+  # Enables auto-hide for the Dock.
+
+- name: Disable Dock animate opening applications
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: launchanim
+    type: bool
+    value: false
+  # Disables the animation for applications opening from the Dock.
+
+- name: Disable Dock show recent applications
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: show-recents
+    type: bool
+    value: false
+  # Removes the "Recent Applications" section from the Dock.
+
+- name: Speed up Mission Control animation duration
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: expose-animation-duration
+    type: float
+    value: 0.15
+  # Speeds up the animations when switching between apps in Mission Control.
+
+    
 
 # ... Add remaining Dock tasks here ...
 
