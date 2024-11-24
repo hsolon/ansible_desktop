@@ -3,6 +3,7 @@
   hosts: localhost
   connection: local
   become: true  # If installing system-wide; change to false if user-specific
+  become_ask_pass: true
   tasks:
 
     # Install Discord
@@ -32,5 +33,5 @@
     # Install Strongbox Pro from the App Store
     - name: Install Strongbox Pro using mas-cli (Mac App Store)
       community.general.mas:
-        id: 1270075435  # Replace with the correct App Store ID for Strongbox Pro
+        id: 1500040999  # Replace with the correct App Store ID for Strongbox Pro
         state: present
