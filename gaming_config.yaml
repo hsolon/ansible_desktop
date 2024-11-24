@@ -23,6 +23,18 @@
         name: roblox
         state: present
 
+    # Install VS Code
+    - name: Install VS Code
+      homebrew:
+        name: visual-studio-code
+        state: present
+
+    # Install Firefox
+    # - name: Install Firefox
+    #   homebrew:
+    #     name: firefox
+    #     state: present
+
     # Install WireGuard from the App Store
     - name: Install WireGuard using mas-cli (Mac App Store)
       community.general.mas:

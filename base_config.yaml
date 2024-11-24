@@ -10,16 +10,6 @@
     - screenshots
     - mas-cli
   
-  # install applications
-  # tasks:
-  # - name: Install VS Code
-  #   homebrew:
-  #     name: visual-studio-code
-  #     state: present
 
-  # - name: Install Firefox
-  #   homebrew:
-  #     name: firefox
-  #     state: present
 
 
