@@ -2,8 +2,7 @@
 - name: Apply Gaming Configuration for macOS
   hosts: localhost
   connection: local
-  become: true  # If installing system-wide; change to false if user-specific
-  become_ask_pass: true
+  become: true
   tasks:
 
     # Install Discord
@@ -29,9 +28,11 @@
       community.general.mas:
         id: 1451685025  # Replace with the correct App Store ID for WireGuard
         state: present
+        become: true
 
     # Install Strongbox Pro from the App Store
     - name: Install Strongbox Pro using mas-cli (Mac App Store)
       community.general.mas:
         id: 1500040999  # Replace with the correct App Store ID for Strongbox Pro
         state: present
+        become: true
