@@ -7,19 +7,19 @@
 
     # Install Discord
     - name: Install Discord using Homebrew Cask
-      homebrew_cask:
+      homebrew:
         name: discord
         state: present
 
     # Install Google Chrome
     - name: Install Google Chrome using Homebrew Cask
-      homebrew_cask:
+      homebrew:
         name: google-chrome
         state: present
 
     # Install Roblox
     - name: Install Roblox using Homebrew Cask
-      homebrew_cask:
+      homebrew:
         name: roblox
         state: present
 
