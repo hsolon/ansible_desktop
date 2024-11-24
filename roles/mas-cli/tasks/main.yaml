@@ -1,0 +1,6 @@
+---
+- name: Ensure mas-cli is installed
+  homebrew:
+    name: mas
+    state: present
+

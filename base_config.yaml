@@ -7,7 +7,8 @@
     - finder
     - screenshots
     - other_configs
-    - screenshots
+    - screenshot
+    - mas-cli
   
   # install applications
   # tasks:
