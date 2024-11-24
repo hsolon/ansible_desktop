@@ -1,0 +1,48 @@
+---
+- name: Apply Gaming Configuration for macOS
+  hosts: localhost
+  connection: local
+  become: false
+  tasks:
+
+    # # Install Discord
+    # - name: Install Discord using Homebrew Cask
+    #   homebrew:
+    #     name: discord
+    #     state: present
+
+    # Install VS Code
+    - name: Install VS Code
+      homebrew:
+        name: visual-studio-code
+        state: present
+
+    # Install Firefox
+    - name: Install Firefox
+      homebrew:
+        name: firefox
+        state: present
+
+    # Install WireGuard from the App Store
+    - name: Install WireGuard using mas-cli (Mac App Store)
+      community.general.mas:
+        id: 1451685025  # Replace with the correct App Store ID for WireGuard
+        state: present
+        
+    # Install Strongbox Pro from the App Store
+    - name: Install Strongbox Pro using mas-cli (Mac App Store)
+      community.general.mas:
+        id: 1481853033  # Replace with the correct App Store ID for Strongbox Pro
+        state: present
+    
+    # Install Microsoft Remote Desktop
+    - name: Install MS Remote Desktop using mas-cli (Mac App Store)
+      community.general.mas:
+        id: 1295203466  # Replace with the correct App Store ID for Remote Desktop
+        state: present
+
+    # Install iStatistica Pro
+    - name: Install iStatistica Pro using mas-cli (Mac App Store)
+      community.general.mas:
+        id: 1447778660  # Replace with the correct App Store ID for iStatistica Pro
+        state: present
