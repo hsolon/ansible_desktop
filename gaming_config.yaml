@@ -2,7 +2,7 @@
 - name: Apply Gaming Configuration for macOS
   hosts: localhost
   connection: local
-  become: true
+  become: false
   tasks:
 
     # Install Discord
