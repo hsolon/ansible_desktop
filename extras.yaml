@@ -23,6 +23,12 @@
         name: firefox
         state: present
 
+    # Install Jettison
+    - name: Install Jettison
+      homebrew:
+        name: jettison
+        state: present
+
     # Install WireGuard from the App Store
     - name: Install WireGuard using mas-cli (Mac App Store)
       community.general.mas:

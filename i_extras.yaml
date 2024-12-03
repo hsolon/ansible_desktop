@@ -29,6 +29,12 @@
         name: visual-studio-code
         state: present
 
+    # Install Jettison
+    - name: Install Jettison
+      homebrew:
+        name: jettison
+        state: present
+
     # Install Firefox
     # - name: Install Firefox
     #   homebrew:
