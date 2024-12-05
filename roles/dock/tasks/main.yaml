@@ -12,8 +12,8 @@
   ignore_errors: true  # Prevent failure if the Dock is already empty
 
 # Add desired applications to the Dock
-- name: Add Finder to the Dock
-  command: dockutil --add /System/Library/CoreServices/Finder.app --position 1 --no-restart
+# - name: Add Finder to the Dock
+#   command: dockutil --add /System/Library/CoreServices/Finder.app --position 1 --no-restart
 
 - name: Add Launchpad to the Dock
   command: dockutil --add /Applications/Launchpad.app --position 2 --no-restart
