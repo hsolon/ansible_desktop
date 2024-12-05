@@ -1,4 +1,34 @@
 ---
+# Remove all items from the Dock
+- name: Remove all items from the Dock
+  command: dockutil --remove all
+  ignore_errors: true  # Prevent failure if the Dock is already empty
+
+# Add desired applications to the Dock
+- name: Add Finder to the Dock
+  command: dockutil --add /System/Library/CoreServices/Finder.app --position 1
+
+- name: Add Launchpad to the Dock
+  command: dockutil --add /Applications/Launchpad.app --position 2
+
+- name: Add Safari to the Dock
+  command: dockutil --add /Applications/Safari.app --position 3
+
+- name: Add Mail to the Dock
+  command: dockutil --add /Applications/Mail.app --position 4
+
+- name: Add Photos to the Dock
+  command: dockutil --add /Applications/Photos.app --position 5
+
+- name: Add Settings to the Dock
+  command: dockutil --add /Applications/System\ Preferences.app --position 6
+
+- name: Add App Store to the Dock
+  command: dockutil --add /Applications/App\ Store.app --position 7
+
+- name: Add Terminal to the Dock
+  command: dockutil --add /Applications/Utilities/Terminal.app --position 8
+
 - name: Remove Dock autohide delay
   community.general.osx_defaults:
     domain: com.apple.dock
