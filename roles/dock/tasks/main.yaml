@@ -13,28 +13,28 @@
 
 # Add desired applications to the Dock
 - name: Add Finder to the Dock
-  command: dockutil --add /System/Library/CoreServices/Finder.app --position 1
+  command: dockutil --add /System/Library/CoreServices/Finder.app --position 1 --no-restart
 
 - name: Add Launchpad to the Dock
-  command: dockutil --add /Applications/Launchpad.app --position 2
+  command: dockutil --add /Applications/Launchpad.app --position 2 --no-restart
 
 - name: Add Safari to the Dock
-  command: dockutil --add /Applications/Safari.app --position 3
+  command: dockutil --add /Applications/Safari.app --position 3 --no-restart
 
 - name: Add Mail to the Dock
-  command: dockutil --add /Applications/Mail.app --position 4
+  command: dockutil --add /Applications/Mail.app --position 4 --no-restart
 
 - name: Add Photos to the Dock
-  command: dockutil --add /Applications/Photos.app --position 5
+  command: dockutil --add /Applications/Photos.app --position 5 --no-restart
 
 - name: Add Settings to the Dock
-  command: dockutil --add /Applications/System\ Preferences.app --position 6
+  command: dockutil --add /Applications/System\ Settings.app --position 6 --no-restart
 
 - name: Add App Store to the Dock
-  command: dockutil --add /Applications/App\ Store.app --position 7
+  command: dockutil --add /Applications/App\ Store.app --position 7 --no-restart
 
 - name: Add Terminal to the Dock
-  command: dockutil --add /Applications/Utilities/Terminal.app --position 8
+  command: dockutil --add /Applications/Utilities/Terminal.app --position 8 --no-restart
 
 - name: Remove Dock autohide delay
   community.general.osx_defaults:
