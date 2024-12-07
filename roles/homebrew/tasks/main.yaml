@@ -1,0 +1,10 @@
+---
+- name: Install Homebrew autoupdate tool
+  homebrew:
+    tap: domt4/autoupdate
+
+- name: Configure Homebrew autoupdate
+  shell: |
+    brew autoupdate start 43200 --upgrade --cleanup --immediate --sudo
+  args:
+    creates: ~/Library/LaunchAgents/homebrew.autoupdate.plist
