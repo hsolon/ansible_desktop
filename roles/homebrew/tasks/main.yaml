@@ -1,8 +1,8 @@
 ---
 - name: Install Homebrew autoupdate tool
   homebrew:
-    name: domt4/autoupdate
-    state: present
+    tap: domt4/autoupdate
+    # state: present
 
 - name: Configure Homebrew autoupdate
   shell: |
