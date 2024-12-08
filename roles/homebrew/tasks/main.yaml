@@ -1,10 +1,10 @@
 ---
 
   - name: Ensure ~/Library/LaunchAgents directory exists
-  file:
-    path: "{{ ansible_user_dir }}/Library/LaunchAgents"
-    state: directory
-    mode: '0755'
+    file:
+      path: "{{ ansible_user_dir }}/Library/LaunchAgents"
+      state: directory
+      mode: '0755'
   
   - name: Tap DomT4/autoupdate repository
     community.general.homebrew_tap:
