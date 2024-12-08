@@ -1,5 +1,11 @@
 ---
 
+  - name: Ensure ~/Library/LaunchAgents directory exists
+  file:
+    path: "{{ ansible_user_dir }}/Library/LaunchAgents"
+    state: directory
+    mode: '0755'
+  
   - name: Tap DomT4/autoupdate repository
     community.general.homebrew_tap:
       name: domt4/autoupdate
@@ -7,3 +13,5 @@
 
   - name: Start Homebrew autoupdate
     command: brew autoupdate start 43200 --upgrade --cleanup --immediate --sudo
+    args:
+        creates: "{{ ansible_user_dir }}/Library/LaunchAgents/homebrew.autoupdate.plist"
