@@ -1,6 +1,5 @@
 ---
 - name: Configure Homebrew Autoupdate
-  hosts: localhost
   tasks:
     - name: Tap DomT4/autoupdate repository
       community.general.homebrew_tap:
