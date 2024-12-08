@@ -5,10 +5,5 @@
       name: domt4/autoupdate
       state: present
 
-  - name: Install Homebrew autoupdate
-    community.general.homebrew:
-      name: autoupdate
-      state: present
-
   - name: Start Homebrew autoupdate
     command: brew autoupdate start 43200 --upgrade --cleanup --immediate --sudo
