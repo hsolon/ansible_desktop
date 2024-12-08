@@ -1,16 +1,16 @@
 ---
-- name: Install and configure Homebrew autoupdate
+- name: Configure Homebrew Autoupdate
   hosts: localhost
   tasks:
     - name: Tap DomT4/autoupdate repository
-      command: brew tap domt4/autoupdate
-      args:
-        creates: /opt/homebrew/Library/Taps/domt4/homebrew-autoupdate
+      community.general.homebrew_tap:
+        name: domt4/autoupdate
+        state: present
 
     - name: Install Homebrew autoupdate
-      command: brew install autoupdate
-      args:
-        creates: /opt/homebrew/bin/brew-autoupdate
+      community.general.homebrew:
+        name: autoupdate
+        state: present
 
     - name: Start Homebrew autoupdate
       command: brew autoupdate start 43200 --upgrade --cleanup --immediate --sudo
